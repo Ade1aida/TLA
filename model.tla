@@ -17,9 +17,22 @@ CONSTANT Bace_proc, Advanced_proc, Input_priority, Max_ready
         base_loop:
             while (TRUE) {
                 either {
-            
+                    \* activate
+
                 }
-                \*print <<Input_priority[Bace_proc[self]]>>;   
+                or {          
+                    \* start
+                    
+                }
+                or {              
+                    \* terminate
+                    
+                }
+                or {
+                    \* preempt
+
+                }
+                print <<Input_priority[Bace_proc[self]]>>;   
             }
     }
     
@@ -28,14 +41,35 @@ CONSTANT Bace_proc, Advanced_proc, Input_priority, Max_ready
         advanced_loop:
             while (TRUE) {
                 either {
-            
-                }            
-               \*print <<Input_priority[Advanced_proc1[self]]>>;
+                    \* activate
+
+                }
+                or {          
+                    \* start
+                    
+                }
+                or {              
+                    \* terminate
+                    
+                }
+                or {
+                    \* preempt
+
+                }
+                or {
+                    \* wait
+
+                }
+                or {
+                    \* release
+
+                }           
+               print <<Input_priority[Advanced_proc1[self]]>>;
             }
     }
 }
 *)
 =============================================================================
 \* Modification History
-\* Last modified Fri Mar 29 15:20:16 MSK 2024 by adeli
+\* Last modified Fri Mar 29 15:28:17 MSK 2024 by adeli
 \* Created Tue Mar 26 12:46:05 MSK 2024 by adeli
