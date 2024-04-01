@@ -66,7 +66,17 @@ Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> st
                     tasks[self].status := "running";
                     runProcess := self;
                 }  
-               or {
+                }           
+             \*print <<tasks[self]>>; 
+             }
+     }
+}
+                     
+process (planing_task2 \in 1..Len(Input_priority))
+    {
+         plan_loop2:
+             while (TRUE) {
+                either  {
                     \* wait
                     await /\ tasks[self].status= "running"
                           /\ tasks[self].type = "A"
@@ -91,7 +101,7 @@ Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> st
 }
 
 *)
-\* BEGIN TRANSLATION (chksum(pcal) = "31420f0c" /\ chksum(tla) = "ab9911da")
+\* BEGIN TRANSLATION (chksum(pcal) = "99b94672" /\ chksum(tla) = "c129a0ef")
 VARIABLES ready, runProcess, run, prioritys, tasks
 
 vars == << ready, runProcess, run, prioritys, tasks >>
@@ -138,20 +148,6 @@ planing_task(self) == \/ /\ /\ tasks[self].status = "suspended"
                                                    ![self].status = "running"]
                          /\ runProcess' = self
                          /\ UNCHANGED <<ready, run>>
-                      \/ /\ /\ tasks[self].status= "running"
-                            /\ tasks[self].type = "A"
-                            /\ \A j \in (tasks[self].prior + 1)..3 : Len(prioritys[j]) = 0
-                         /\ tasks' = [tasks EXCEPT ![self].status = "waiting"]
-                         /\ run' = run - 1
-                         /\ runProcess' = 0
-                         /\ UNCHANGED <<ready, prioritys>>
-                      \/ /\ /\ tasks[self].status = "waiting"
-                            /\ tasks[self].type = "A"
-                            /\ ready < Max_ready
-                         /\ prioritys' = [prioritys EXCEPT ![tasks[self].prior] = Append(prioritys[tasks[self].prior], self)]
-                         /\ tasks' = [tasks EXCEPT ![self].status = "ready"]
-                         /\ ready' = ready + 1
-                         /\ UNCHANGED <<runProcess, run>>
 
 Next == (\E self \in 1..Len(Input_priority): planing_task(self))
 
@@ -161,5 +157,5 @@ Spec == Init /\ [][Next]_vars
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 01 04:15:31 MSK 2024 by adeli
+\* Last modified Mon Apr 01 04:12:59 MSK 2024 by adeli
 \* Created Tue Mar 26 12:46:05 MSK 2024 by adeli

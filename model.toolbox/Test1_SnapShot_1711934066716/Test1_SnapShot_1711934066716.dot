@@ -1,0 +1,28 @@
+strict digraph DiskGraph {
+edge [colorscheme="paired12"]
+nodesep=0.35;
+subgraph cluster_graph {
+color="white";
+-3865573186493702734 [label="/\\ run = 0\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 0\n/\\ ready = 0\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"suspended\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"suspended\"] >>",style = filled]
+-3865573186493702734 -> 5411319458068459849 [label="",color="2",fontcolor="2"];
+5411319458068459849 [label="/\\ run = 0\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<1>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 0\n/\\ ready = 1\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"ready\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"suspended\"] >>"];
+-3865573186493702734 -> 5383727296764159495 [label="",color="2",fontcolor="2"];
+5383727296764159495 [label="/\\ run = 0\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<2>>)\n/\\ runProcess = 0\n/\\ ready = 1\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"suspended\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"ready\"] >>"];
+5411319458068459849 -> -8681066029035875891 [label="",color="2",fontcolor="2"];
+-8681066029035875891 [label="/\\ run = 1\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 1\n/\\ ready = 0\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"running\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"suspended\"] >>"];
+5383727296764159495 -> -2224431428747436091 [label="",color="2",fontcolor="2"];
+-2224431428747436091 [label="/\\ run = 1\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 2\n/\\ ready = 0\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"suspended\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"running\"] >>"];
+-8681066029035875891 -> -3865573186493702734 [label="",color="2",fontcolor="2"];
+-2224431428747436091 -> -8723343688472329543 [label="",color="2",fontcolor="2"];
+-8723343688472329543 [label="/\\ run = 1\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<1>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 2\n/\\ ready = 1\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"ready\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"running\"] >>"];
+-8681066029035875891 -> 7828366210796568611 [label="",color="2",fontcolor="2"];
+7828366210796568611 [label="/\\ run = 1\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<2>>)\n/\\ runProcess = 1\n/\\ ready = 1\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"running\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"ready\"] >>"];
+-8723343688472329543 -> 5411319458068459849 [label="",color="2",fontcolor="2"];
+-2224431428747436091 -> -3865573186493702734 [label="",color="2",fontcolor="2"];
+7828366210796568611 -> -8723343688472329543 [label="",color="2",fontcolor="2"];
+{rank = same; -3865573186493702734;}
+{rank = same; 5383727296764159495;5411319458068459849;}
+{rank = same; -8681066029035875891;-2224431428747436091;}
+{rank = same; 7828366210796568611;-8723343688472329543;}
+}
+}

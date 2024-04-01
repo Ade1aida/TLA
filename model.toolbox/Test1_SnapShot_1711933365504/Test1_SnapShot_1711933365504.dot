@@ -1,0 +1,19 @@
+strict digraph DiskGraph {
+edge [colorscheme="paired12"]
+nodesep=0.35;
+subgraph cluster_graph {
+color="white";
+4777314783444144480 [label="/\\ run = 0\n/\\ advenc = <<>>\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 0\n/\\ ready = 0\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"suspended\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"suspended\"] >>",style = filled]
+4777314783444144480 -> 4777314783444144480 [label="",color="2",fontcolor="2"];
+4777314783444144480 -> -467531728527912261 [label="",color="2",fontcolor="2"];
+-467531728527912261 [label="/\\ run = 0\n/\\ advenc = <<>>\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<2>>)\n/\\ runProcess = 0\n/\\ ready = 1\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"suspended\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"ready\"] >>"];
+-467531728527912261 -> -467531728527912261 [label="",color="2",fontcolor="2"];
+-467531728527912261 -> 8083858244619386312 [label="",color="2",fontcolor="2"];
+8083858244619386312 [label="/\\ run = 1\n/\\ advenc = <<>>\n/\\ prioritys = (0 :> <<>> @@ 1 :> <<>> @@ 2 :> <<>> @@ 3 :> <<>>)\n/\\ runProcess = 2\n/\\ ready = 0\n/\\ tasks = << [type |-> \"A\", prior |-> 1, status |-> \"suspended\"],\n   [type |-> \"B\", prior |-> 3, status |-> \"running\"] >>"];
+8083858244619386312 -> 8083858244619386312 [label="",color="2",fontcolor="2"];
+8083858244619386312 -> 4777314783444144480 [label="",color="2",fontcolor="2"];
+{rank = same; 4777314783444144480;}
+{rank = same; -467531728527912261;}
+{rank = same; 8083858244619386312;}
+}
+}

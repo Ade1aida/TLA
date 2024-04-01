@@ -3,7 +3,7 @@ EXTENDS Integers, Naturals, Sequences, TLC
 
 CONSTANT Input_type, Input_priority, Max_ready
 
-Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> status]
+MakeTasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> status]
 
 (*--algorithm model {
     \* advancedStates = <<"suspended", "ready", "running", "waiting">> 
@@ -13,7 +13,7 @@ Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> st
              runProcess = 0, 
              run = 0, 
              prioritys = [i \in 0..3 |-> <<>>],
-             tasks = [i \in 1..Len(Input_priority) |-> Make_tasks(Input_type[i], Input_priority[i],"suspended")]
+             tasks = [i \in 1..Len(Input_priority) |-> MakeTasks(Input_type[i], Input_priority[i],"suspended")]
     
     process (planing_task \in 1..Len(Input_priority))
     {
@@ -21,8 +21,7 @@ Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> st
              while (TRUE) {
                 either {
                     \* activate
-                    await /\ tasks[self].status = "suspended" 
-                          /\ ready < Max_ready;
+                    await /\ tasks[self].status = "suspended" /\ ready < Max_ready;
                           
                     prioritys[tasks[self].prior] := Append(prioritys[tasks[self].prior], self);
                     tasks[self].status  := "ready";
@@ -65,8 +64,8 @@ Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> st
                     tasks[runProcess].status := "ready" ||
                     tasks[self].status := "running";
                     runProcess := self;
-                }  
-               or {
+                }
+                or {
                     \* wait
                     await /\ tasks[self].status= "running"
                           /\ tasks[self].type = "A"
@@ -91,7 +90,7 @@ Make_tasks(type, prior, status) == [type |-> type, prior |-> prior, status|-> st
 }
 
 *)
-\* BEGIN TRANSLATION (chksum(pcal) = "31420f0c" /\ chksum(tla) = "ab9911da")
+\* BEGIN TRANSLATION (chksum(pcal) = "15278bea" /\ chksum(tla) = "3d16b471")
 VARIABLES ready, runProcess, run, prioritys, tasks
 
 vars == << ready, runProcess, run, prioritys, tasks >>
@@ -103,10 +102,9 @@ Init == (* Global variables *)
         /\ runProcess = 0
         /\ run = 0
         /\ prioritys = [i \in 0..3 |-> <<>>]
-        /\ tasks = [i \in 1..Len(Input_priority) |-> Make_tasks(Input_type[i], Input_priority[i],"suspended")]
+        /\ tasks = [i \in 1..Len(Input_priority) |-> MakeTasks(Input_type[i], Input_priority[i],"suspended")]
 
-planing_task(self) == \/ /\ /\ tasks[self].status = "suspended"
-                            /\ ready < Max_ready
+planing_task(self) == \/ /\ /\ tasks[self].status = "suspended" /\ ready < Max_ready
                          /\ prioritys' = [prioritys EXCEPT ![tasks[self].prior] = Append(prioritys[tasks[self].prior], self)]
                          /\ tasks' = [tasks EXCEPT ![self].status = "ready"]
                          /\ ready' = ready + 1
@@ -161,5 +159,5 @@ Spec == Init /\ [][Next]_vars
 
 =============================================================================
 \* Modification History
-\* Last modified Mon Apr 01 04:15:31 MSK 2024 by adeli
+\* Last modified Mon Apr 01 03:28:50 MSK 2024 by adeli
 \* Created Tue Mar 26 12:46:05 MSK 2024 by adeli
